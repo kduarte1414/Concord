@@ -14,14 +14,15 @@ public class User
 	ArrayList <Server> servers;
 	ArrayList <User> blocked; //list of blocked users
 	
-	public User(String name, String un, int id )
+	public User(String name, String un, int id , String pass)
 	{
 		servers = new ArrayList <Server>();
 		blocked = new ArrayList <User>();
 		
-		realName= name;
-		username=un;
-		uniqueID=id;
+		realName = name;
+		username = un;
+		uniqueID = id;
+		password = pass;
 	}
 	
 	/**
@@ -175,6 +176,31 @@ public class User
 		
 	}
 	
-
+	//check this again cause the cloud thing is iffy 
+	public void CreateServer(Cloud cloud,String name)
+	{
+		cloud.createServer(name);
+		ArrayList <Server> list =cloud.getServers();
+		Server s = list.get(list.size() - 1);
+		s.addUsers(this);
+		s.assignAdmin(this);
+		servers.add(s);
+	}
 	
+	public void CreateChannel(Server s, String name)
+	{
+		if(s.getUsers().contains(this)) {
+			Channel c = new Channel(name,s.getId());
+			s.addChannel(c);
+		}
+	}
+	public void pinMessage(Message m) {
+		m.pinMessage();
+	}
+	public void invite(Server s, User u) {
+		if(servers.contains(s)) {
+			s.addUsers(u);
+		}
+	
+	}
 }

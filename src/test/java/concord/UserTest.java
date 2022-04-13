@@ -19,10 +19,10 @@ class UserTest
 	@BeforeEach
 	void setUp() throws Exception
 	{
-		u1 = new User("Killua","zoldyck" , 2);
-		u2 = new User("Hisoka","cardFool", 3); 
-		u3 = new User("Gon", "fishingRod3", 4);
-		u4 = new User("Chrollo","PhantomLead", 5);
+		u1 = new User("Killua","zoldyck" , 2, "1234");
+		u2 = new User("Hisoka","cardFool", 3,"567"); 
+		u3 = new User("Gon", "fishingRod3", 4,"dadsucks");
+		u4 = new User("Chrollo","PhantomLead", 5, "7889");
 		
 		s1 = new Server("Science",1);
 		s2 = new Server("Cooking",2);

@@ -14,6 +14,10 @@ public abstract class Role
 	Server serverIn; //
 	ArrayList <String> rolesBelow = new ArrayList<String>();
 	
+	public Role()
+	{
+		
+	}
 	/**
 	 * @return the canRespond
 	 */
@@ -66,7 +70,7 @@ public abstract class Role
 
 	public void setRoleName(String role)
 	{
-		roleName=role;
+		roleName = role;
 	}
 	
 	public void blockChannel(Channel c)
@@ -94,6 +98,10 @@ public abstract class Role
 			}
 	}
 	
+	public void pinMessage(Channel c, Message m)
+	{
+		m.pinMessage();
+	}
 	
 	//setting booleans 
 	/**

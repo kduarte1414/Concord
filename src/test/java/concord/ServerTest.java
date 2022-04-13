@@ -26,9 +26,9 @@ class ServerTest
 		c2 = new Channel("Attack on Titan", 1);
 		c3 = new Channel("Assasination Classroom",1);
 		
-		u1 = new User("koro","octoTeach", 1);
-		u2 = new User("Naruto", "nineTails", 2);
-		u3 = new User("Eren","attackTitan",3);
+		u1 = new User("koro","octoTeach", 1,"explosive");
+		u2 = new User("Naruto", "nineTails", 2, "ramenrules");
+		u3 = new User("Eren","attackTitan",3,"foundingTitan");
 		
 			
 	}

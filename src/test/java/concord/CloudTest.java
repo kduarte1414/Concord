@@ -16,16 +16,16 @@ class CloudTest
 	void setUp() throws Exception
 	{
 		cloud = new Cloud();
-		 u1 = new User("cat","yarnlover",1);
-		 u2 = new User("dog","tennisball",2);
+		 u1 = new User("cat","yarnlover",1,"catsrule");
+		 u2 = new User("dog","tennisball",2,"dogsarebest");
 		 s3 = new Server("lizardcare",3);
 	}
 
 	@Test
 	void testCreatingUser()
 	{
-		cloud.createUser("cat", "yarnlover");
-		cloud.createUser("dog", "tennisball");
+		cloud.createUser("cat", "yarnlover","catsrule");
+		cloud.createUser("dog", "tennisball","dogsarebest");
 		assertEquals(2,cloud.getUserCount());
 		assertEquals(u1.getUniqueID(),cloud.getUsers().get(0).getUniqueID());
 		assertEquals(u2.getUniqueID(),cloud.getUsers().get(1).getUniqueID());

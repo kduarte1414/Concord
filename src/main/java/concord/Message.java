@@ -10,8 +10,16 @@ public class Message
 	protected Message linkMessage;
 	protected boolean pinned;
 	protected Date timeStamp;
+	protected Channel channelIn;
 	//protected Date timeStamp;
 	
+	public Message(String t, int id, Channel c) {
+		text = t;
+		userID = id;
+		timeStamp= new Date();
+		channelIn = c;
+	}
+	//Messages that are in direct messages dont have channels
 	public Message(String t, int id) {
 		text = t;
 		userID = id;

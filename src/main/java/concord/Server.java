@@ -158,7 +158,10 @@ public class Server
 	{
 		return roles.get(u).getRoleName();
 	}
-	
+	public Role getUserRoleObject(User u)
+	{
+		return roles.get(u);
+	}
 	
 	
 

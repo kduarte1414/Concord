@@ -41,8 +41,8 @@ class RoleTest
 		c1 = new Channel("Vanderpump Rules",1);
 		c2 = new Channel("HunterxHunter",2);
 		
-		u1 = new User("Kat","KatDua",1);
-		u2 = new User("Liz","LizzyLi",2);
+		u1 = new User("Kat","KatDua",1, "duakit");
+		u2 = new User("Liz","LizzyLi",2, "satsuma");
 		
 		a1 = new Admin(s1);
 		mod1 = new Moderator(s1);

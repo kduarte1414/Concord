@@ -34,19 +34,72 @@ public class Cloud
 		return serverCounter;
 	}
 
-	public void createUser(String name, String un) {
-		userCounter= userCounter+1;
-		User u = new User(name, un, userCounter);
-		users.add(u);
+	public void createUser(String name, String un, String password) {
+		if(!usernameExists(un)) 
+		{
+			userCounter= userCounter+1;
+			User u = new User(name, un, userCounter, password);
+			users.add(u);
+		}
 		
 	}
 	
 	public void createServer(String name){
-		serverCounter = serverCounter+1;
-		Server s = new Server(name, serverCounter);
-		servers.add(s);
+		if(!serverExists(name)) 
+		{
+			serverCounter = serverCounter+1;
+			Server s = new Server(name, serverCounter);
+			servers.add(s);
+		}
 	}
 	
+	public User getUser(String username)
+	{
+	
+		User found= users.get(0);
+		for(User u: users) {
+			if(u.getUsername()== username) {
+				found = u;
+			}
+		}
+		return found;
+	}
+	
+	public boolean usernameExists(String name)
+	{
+		boolean found= false;
+		
+		for(User u: users) {
+			if(u.getUsername()== name) {
+				found = true;
+			}
+		}
+		return found;
+	}
+	
+	public boolean serverExists(String name)
+	{
+		boolean found= false;
+		
+		for(Server s: servers) {
+			if(s.getName()== name) {
+				found = true;
+			}
+		}
+		return found;
+	}
+
+
+	public void clearData()
+	{
+		servers.clear();
+		users.clear();
+		userCounter = 0;
+		serverCounter = 0;
+		
+		
+		
+	}
 	
 	
 	

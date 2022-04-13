@@ -21,9 +21,9 @@ class ChannelTest
 		s1 = new Server("MathStudy",1);
 		s2 = new Server("ScienceStudy",2);
 		c1 = new Channel("Linear Algebra",1);
-		m1 = new Message("hello Linear Algebra world", 1);
-		m2 = new Message("Can I get some help with LU decomposition?",2);
-		m3 = new Message("I can help, what about it?",4);
+		m1 = new Message("hello Linear Algebra world", 1,c1);
+		m2 = new Message("Can I get some help with LU decomposition?",2,c1);
+		m3 = new Message("I can help, what about it?",4,c1);
 	}
 
 	@Test
