@@ -1,7 +1,14 @@
 package concord;
 
-public class Default extends Role
+import java.io.Serializable;
+
+public class Default extends Role implements Serializable 
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6044557346083739919L;
+
 	public Default(Server s) 
 	{
 	
@@ -12,6 +19,7 @@ public class Default extends Role
 	canAssignAdmin=false;
 	canRespond = true;
 	canCreateNewMessage = true;
+	canChangeServerDescription= false;
 	serverIn =s;
 	rolesBelow.add("default");
 

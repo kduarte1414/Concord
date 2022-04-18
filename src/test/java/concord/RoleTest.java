@@ -52,9 +52,9 @@ class RoleTest
 		mod2 = new Moderator(s2);
 		d2 = new Default(s2);
 		
-		m1 = new Message("It's not about the pasta!",1);
-		m2 = new Message("I don't know what I did to you but I will take a Pinot Grigio",2);
-		m3 = new Message ("Bungee gum",1);
+		m1 = new Message("It's not about the pasta!",1,1);
+		m2 = new Message("I don't know what I did to you but I will take a Pinot Grigio",2,1);
+		m3 = new Message ("Bungee gum",1,2);
 		
 		
 	}

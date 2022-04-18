@@ -30,6 +30,7 @@ public class realCloud extends UnicastRemoteObject implements Observed,CloudServ
 	//returns the user with matching ID
 	public User findUser(int id)
 	{
+		visits++;
 		ArrayList <User> users = cloud.getUsers();
 		
 		User found= users.get(0);
@@ -44,6 +45,7 @@ public class realCloud extends UnicastRemoteObject implements Observed,CloudServ
 	//returns user with matching username assuming they are unique 
 	public User findUser(String username)
 	{
+		visits++;
 		ArrayList <User> users = cloud.getUsers();
 		
 		User found= users.get(0);
@@ -58,6 +60,7 @@ public class realCloud extends UnicastRemoteObject implements Observed,CloudServ
 	//Returns a server with matching ID
 	public Server findServer(int id)
 	{
+		visits++;
 		ArrayList <Server> servers = cloud.getServers();
 		
 		Server found= servers.get(0);
@@ -72,6 +75,7 @@ public class realCloud extends UnicastRemoteObject implements Observed,CloudServ
 	//Returns a server with matching name
 	public Server findServer(String name)
 	{
+		visits++;
 		ArrayList <Server> servers = cloud.getServers();
 		
 		Server found= servers.get(0);
@@ -86,7 +90,7 @@ public class realCloud extends UnicastRemoteObject implements Observed,CloudServ
 	@Override
 	public int getNextUserId()
 	{
-		
+		visits++;
 		return cloud.getUserCount()+1;
 	}
 	
@@ -94,12 +98,15 @@ public class realCloud extends UnicastRemoteObject implements Observed,CloudServ
 	@Override
 	public boolean verifyPassword(int userID, String username, String password)
 	{
-		// TODO Auto-generated method stub
+		
 		visits++;
 		User u = findUser(userID);
-		if(u.getUsername()== username && u.getPassword()==password) {
+		if(u.getUsername().equals(username) && u.getPassword().equals(password)) 
+		{
 			return true;
+			
 		}else {
+			
 			return false;
 		}
 
@@ -109,23 +116,25 @@ public class realCloud extends UnicastRemoteObject implements Observed,CloudServ
 	public int getNextServerId()
 	{
 		// TODO Auto-generated method stub
+		visits++;
 		return cloud.getServerCount()+1;
 	}
 	
 	@Override
 	public void storeData()
 	{
+		visits++;
 		XMLEncoder encoder=null;
 		try{
 		encoder=new XMLEncoder(new BufferedOutputStream(new FileOutputStream("realCloud.xml")));
 		}catch(FileNotFoundException fileNotFound){
 			System.out.println("ERROR: While Creating or Opening the File realCloud.xml");
 		}
-		encoder.writeObject(this);
+		encoder.writeObject(cloud);
 		encoder.close();
 
 	}
-	public static realCloud loadFromDisk()
+	public static Cloud loadFromDisk()
 	{
 		XMLDecoder decoder=null;
 		try {
@@ -134,7 +143,7 @@ public class realCloud extends UnicastRemoteObject implements Observed,CloudServ
 			System.out.println("ERROR: File realCloud.xml not found");
 		}
 		
-		realCloud real = (realCloud) decoder.readObject();
+		Cloud real = (Cloud) decoder.readObject();
 		return real;
 		
 		
@@ -143,10 +152,12 @@ public class realCloud extends UnicastRemoteObject implements Observed,CloudServ
 	//Search Function
 	public ArrayList <User> getAllUsers()
 	{
+		visits++;
 		return cloud.getUsers();
 	}
 	public ArrayList <Server>  getAllServers()
 	{
+		visits++;
 		return cloud.getServers();
 	}
 	
@@ -163,8 +174,7 @@ public class realCloud extends UnicastRemoteObject implements Observed,CloudServ
 		User unblocking =findUser(id1);
 		User unblocked = findUser(id2);
 		unblocking.unBlock(unblocked);
-				
-		
+			
 	}
 	
 	public void joinServer(int userId, int serverId) {	
@@ -172,17 +182,38 @@ public class realCloud extends UnicastRemoteObject implements Observed,CloudServ
 		Server s = findServer(serverId);
 		User u = findUser(userId);
 		u.joinServer(s);
-		
 	}
 	
 	//come back to this 
 	public void createServer(int userId, String name) {
 		visits++;
 		User u = findUser(userId);
-		u.CreateServer(cloud,name);
+		Server s = new Server(name,getNextServerId());
+		u.CreateServer(s);
+		cloud.addServer(s);
+		try
+		{
+			notifyUpdated();
+		} catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	
+	public void addObserverServer(Client client, int serverId)
+	{
+		Server s = findServer(serverId);
+		
+		try
+		{
+			s.addObserver(client);
+		} catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	public void invite(int invites,int invited, int serverId)
 	{
 		visits++;
@@ -213,6 +244,7 @@ public class realCloud extends UnicastRemoteObject implements Observed,CloudServ
 		User u = findUser(userId);
 		Server s = findServer(serverId);
 		u.leaveServer(s);
+		
 	}
 	public void kickUser(int userId, int kickedUserId, int serverId)
 	{
@@ -227,6 +259,7 @@ public class realCloud extends UnicastRemoteObject implements Observed,CloudServ
 	@Override
 	public void addObserver(Observer o) throws RemoteException
 	{
+		visits++;
 		observers.add(o);
 		
 	}
@@ -234,6 +267,7 @@ public class realCloud extends UnicastRemoteObject implements Observed,CloudServ
 	@Override
 	public void removeObserver(Observer o) throws RemoteException
 	{
+		visits++;
 		observers.remove(o);
 		
 	}
@@ -241,34 +275,40 @@ public class realCloud extends UnicastRemoteObject implements Observed,CloudServ
 	@Override
 	public ArrayList<User> getUsers()
 	{
-		// TODO Auto-generated method stub
+		visits++;
 		return cloud.getUsers();
 	}
 
 	@Override
 	public void changePassword(int uniqueID, String pass)
 	{
+		visits++;
 		User u= findUser(uniqueID);
 		u.setPassword(pass);
 		
 	}
 	
 	
-	public void pinMessage(int userId, Server s, Channel c, Message m)
+	public void pinMessage(int userId, int serverId,String name, int messageID)
 	{
 		visits++;
 		User u = findUser(userId);
+		Server s = findServer(serverId);
 		Role r = s.getUserRoleObject(u);
-		r.pinMessage(c, m);
-	}
-	/*
-	//Can I treat a DM like a private channel with just two people?
-	public void DM(String username)
-	{
+		Channel c = s.findChannel(name);
+		r.pinMessage(c, c.searchMessage(messageID));
 		
 	}
-	*/
-
+	//Sending a message in a channel 
+	public void sendMessageChannel(int userId, int serverId, String name,String text)
+	{
+		
+		User u = findUser(userId);
+		Server s = findServer(serverId);
+		Role r = s.getUserRoleObject(u);
+		Channel c = s.findChannel(name);
+		r.createNewMessage(c,text,userId);
+	}
 	@Override
 	public int getVisits()
 	{
@@ -278,12 +318,92 @@ public class realCloud extends UnicastRemoteObject implements Observed,CloudServ
 	{
 		visits=num;
 	}
-
+	
 	public void clearData()
 	{
 		cloud.clearData();
+		visits=0;
 		
 	}
+
+	@Override
+	public void AssignAdmin(int userId, int userId2, int serverId) throws RemoteException
+	{
+		// TODO Auto-generated method stub
+		User u = findUser(userId);
+		User u2 = findUser(userId);
+		Server s = findServer(serverId);
+		Role r = s.getUserRoleObject(u);
+		r.AssignAdmin(u2);
+		//notifyUpdated();
 		
+		
+	}
+
+	@Override
+	public void AssignModerator(int userId, int userId2, int serverId) throws RemoteException
+	{
+		// TODO Auto-generated method stub
+		User u = findUser(userId);
+		User u2 = findUser(userId2);
+		Server s = findServer(serverId);
+		Role r = s.getUserRoleObject(u);
+		r.AssignModerator(u2);
+		
+	}
+
+	@Override
+	public void setServerDescription(int userId, int serverId, String text) throws RemoteException
+	{
+		User u = findUser(userId);
+		Server s = findServer(serverId);
+		Role r = s.getUserRoleObject(u);
+		r.ChangeServerDescription(text);
+		
+	}
+
+	@Override
+	public void lockChannel(int userId, int serverId, String name) throws RemoteException
+	{
+		User u = findUser(userId);
+		Server s = findServer(serverId);
+		Role r = s.getUserRoleObject(u);
+		Channel c = s.findChannel(name);
+		r.blockChannel(c);
+	}
+	
+	public void setUserBio(int userId, String bio)
+	{
+		User u = findUser(userId);
+		u.setUserBio(bio);
+	}
+
+	public void setRealName(int userId, String name)
+	{
+		User u = findUser(userId);
+		u.setRealName(name);
+	}
+	public void setUsername(int userId, String username)
+	{
+		User u = findUser(userId);
+		u.setUsername(username);
+	}
+	
+	//Everyone is updated
+	public void notifyUpdated() throws RemoteException
+	{
+		for(Observer o: observers)
+		{
+			try
+			{
+				o.update();
+				
+			} catch (RemoteException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}	
 
 }

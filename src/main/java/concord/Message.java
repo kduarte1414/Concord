@@ -1,37 +1,45 @@
 package concord;
+import java.io.Serializable;
 import java.util.Date;
 
 
-public class Message
+public class Message implements Serializable 
 {
 
+	
+	private static final long serialVersionUID = 7959383570910422524L;
+	
 	protected String text;
 	protected int userID;
 	protected Message linkMessage;
 	protected boolean pinned;
 	protected Date timeStamp;
 	protected Channel channelIn;
+	protected int id;
 	//protected Date timeStamp;
 	
-	public Message(String t, int id, Channel c) {
+	public Message(String t, int id, int messageID) {
 		text = t;
 		userID = id;
 		timeStamp= new Date();
-		channelIn = c;
-	}
-	//Messages that are in direct messages dont have channels
-	public Message(String t, int id) {
-		text = t;
-		userID = id;
-		timeStamp= new Date();
+		id = messageID;
 	}
 	
+	/*
+	//Messages that are in direct messages dont have channels
+	public Message(String t, int id, int Mid) {
+		text = t;
+		userID = id;
+		timeStamp= new Date();
+		id = Mid;
+	}
+	*/
 	//respond message 
 	public Message(String t, int id, Message m2) {
 		text = t;
 		userID = id;
 		linkMessage = m2;
-		timeStamp= new Date();
+		timeStamp = new Date();
 	}
 	public void linkMessage(Message M) {
 		linkMessage = M;
@@ -70,6 +78,10 @@ public class Message
 	public boolean isPinned()
 	{
 		return pinned;
+	}
+	public int getId()
+	{
+		return id;
 	}
 	
 	

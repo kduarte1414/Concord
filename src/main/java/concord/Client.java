@@ -29,97 +29,120 @@ public class Client extends UnicastRemoteObject implements Observer, Serializabl
 	{
 		return account;
 	}
-	public boolean authentication(String username, String password) {
-	//inside TEST you ask for username and password 
+	public boolean authentication(String username, String password) throws RemoteException {
 		User u1 = Users.get(0);
 		account= u1;
 		for(User u: Users) {
-			if(u.getUsername() == username) {
+			if(u.getUsername().equals(username)) {
 				account = u;
 			}
 		}
 		return rc.verifyPassword(account.getUniqueID(), username, password);
 
-		
 	}
-	public void setPassword(String pass) {
+	public void setPassword(String pass) throws RemoteException {
 		rc.changePassword(account.getUniqueID(),pass);
 	}
 	
-	public void blockUser(User u) {
+	public void blockUser(User u) throws RemoteException {
 		int id1 = account.getUniqueID();
 		int id2= u.getUniqueID();
 		rc.blockUser(id1, id2);	
 		
 	}
 	
-	public void unBlock( User u) {
+	public void unBlock(User u) throws RemoteException {
 		int id1 = account.getUniqueID();
 		int id2= u.getUniqueID();
 		rc.unBlock(id1, id2);
 		
 	}
 	
-	public void joinServer(Server s) {	
+	public void joinServer(Server s) throws RemoteException {	
 		int userId= account.getUniqueID();
 		int serverId = s.getId();
+		s.addObserver(this);
 		rc.joinServer(userId,serverId);
+	}
+	public void createServer(String name) throws RemoteException {
+		rc.createServer(account.getUniqueID(),name);
+		//TODO figure out why I can't add observer
+		//rc.addObserverServer(this, rc.getNextServerId()-1);
 		
 	}
-	
-	//come back to this and check it 
-	public void createServer( String name) {
-		rc.createServer(account.getUniqueID(),name);
-	}
-
-
-	public void text(Role r, Channel c, Message m )
+	public void text(Role r, Channel c, Message m ) throws RemoteException
 	{
 		rc.text(r,c,m);
+		c.getServerIn();
+		//rc.findServer(c.getServerIn()).addObserver(this);
 	}
 	
-	public void createChannel(Server s, String name)
+	public void createChannel(Server s, String name) throws RemoteException
 	{
 		rc.createChannel(account.getUniqueID(), s.getId(), name);
 	}
-	public void DM(String username)
-	{	
-		
-		
-	}
-	public void leaveServer(Server s)
+	public void leaveServer(Server s) throws RemoteException
 	{
 		rc.leaveServer(account.getUniqueID(), s.getId());
 	}
 	
-	public void kickUser(Server s,User u)
+	public void kickUser(Server s,User u) throws RemoteException
 	{
 		rc.kickUser(account.getUniqueID(),u.getUniqueID(),s.getId());
 	}
 
+	public void pinMessage(Server s,Channel c, Message m) throws RemoteException
+	{
+		rc.pinMessage(account.getUniqueID(),s.getId(),c.getName(),m.getId());
+	}
+	public void sendMessageChannel(Server s, String name, String text) throws RemoteException
+	{
+		rc.sendMessageChannel(account.getUniqueID(), s.getId(),name, text);
+	}
+	
+	public void invite(User invited ,Server s) throws RemoteException {
+		int id1 = account.getUniqueID();
+		int id2 = invited.getUniqueID();
+		int sId = s.getId();
+		rc.invite(id1,id2,sId);
+		
+	}
+	public void setUserBio(String bio) throws RemoteException
+	{
+		rc.setUserBio(account.getUniqueID(),bio);
+	}
+	public void setRealName(String name) throws RemoteException
+	{
+		rc.setRealName(account.getUniqueID(), name);
+	}
+	public void setLockChannel(Channel c, Server s) throws RemoteException
+	{
+		rc.lockChannel(account.getUniqueID(),s.getId(),c.getName());
+	}
+	public void setUsername(String username)throws RemoteException
+	{
+		rc.setUsername(account.getUniqueID(), username);
+	}
+	public void AssignAdmin(User u2, Server s1) throws RemoteException
+	{
+		rc.AssignAdmin(account.getUniqueID(),u2.getUniqueID(),s1.getId());
+	}
+	
+	public void AssignModerator(User u2, Server s1) throws RemoteException
+	{
+		rc.AssignModerator(account.getUniqueID(),u2.getUniqueID(),s1.getId());
+	}
+	
+	public void changeServerDescription(Server s, String description) throws RemoteException
+	{
+		rc.setServerDescription(account.uniqueID,s.getId(),description);
+	}
 	@Override
 	public void update() throws RemoteException
 	{
 		updateCounter++;
 	
 	}
-	
-	public void pinMessage(Server s,Channel c, Message m)
-	{
-		rc.pinMessage(account.getUniqueID(),s,c,m);
-	}
-	
-	public void invite(User invited ,Server s) {
-		int id1 = account.getUniqueID();
-		int id2 = invited.getUniqueID();
-		int sId = s.getId();
-		rc.invite(id1,id2,sId);
-	}
-	
-	
-	
-	
-	
 	
 	
 }

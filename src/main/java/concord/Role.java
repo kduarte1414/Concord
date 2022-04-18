@@ -1,9 +1,14 @@
 package concord;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Role
+public abstract class Role implements Serializable 
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1919316376357218358L;
 	String roleName;
 	boolean canBlockChannel;
 	boolean canKickUser;
@@ -11,6 +16,7 @@ public abstract class Role
 	boolean canAssignAdmin;
 	boolean canRespond;
 	boolean canCreateNewMessage;
+	boolean canChangeServerDescription;
 	Server serverIn; //
 	ArrayList <String> rolesBelow = new ArrayList<String>();
 	
@@ -41,10 +47,27 @@ public abstract class Role
 	{
 		return canCreateNewMessage;
 	}
-
 	/**
-	 * @param canCreateNewMessage the canCreateNewMessage to set
+	 * @return the canChangeServerDescription
 	 */
+	public boolean isCanChangeServerDescription()
+	{
+		return canChangeServerDescription;
+	}
+	/**
+	 * @param canChangeServerDescription the canChangeServerDescription to set
+	 */
+	public void setCanChangeServerDescription(boolean canChangeServerDescription)
+	{
+		this.canChangeServerDescription = canChangeServerDescription;
+	}
+
+	public void ChangeServerDescription(String text)
+	{
+		if(canChangeServerDescription) {
+			serverIn.setDescription(text);
+		}
+	}
 	public void setCanCreateNewMessage(boolean canCreateNewMessage)
 	{
 		this.canCreateNewMessage = canCreateNewMessage;
@@ -55,19 +78,38 @@ public abstract class Role
 			//can only send messages in a channel that this server has
 			if(serverIn.getChannels().contains(c)) {
 				c.newMessage(m);
+				serverIn.update();
+				
 			}
 		}
 	}
-	
+	public void createNewMessage(Channel c, String m, int userId) {
+		if(canCreateNewMessage) {
+			//can only send messages in a channel that this server has
+			if(serverIn.getChannels().contains(c)){
+				c.newMessage(m,userId);
+				serverIn.update();
+			}
+		}
+	}
 	public void respond(Channel c, Message m1, Message m2) {
 		if(canRespond){
 			if(serverIn.getChannels().contains(c)) {
 				c.replyMessage(m1, m2);
+				serverIn.update();
 			}
 		}
 		
 	}
-
+	public void respond(Channel c, Message m1, String m2, int userID) {
+		if(canRespond){
+			if(serverIn.getChannels().contains(c)) {
+				c.replyMessage(m1, m2,userID);
+				serverIn.update();
+			}
+		}
+		
+	}
 	public void setRoleName(String role)
 	{
 		roleName = role;
@@ -100,7 +142,8 @@ public abstract class Role
 	
 	public void pinMessage(Channel c, Message m)
 	{
-		m.pinMessage();
+		c.pinMessage(m);
+		serverIn.update();
 	}
 	
 	//setting booleans 

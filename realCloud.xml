@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="14.0.2" class="java.beans.XMLDecoder">
+ <object class="concord.Cloud" id="Cloud0">
+  <void property="servers">
+   <void method="add">
+    <object class="concord.Server">
+     <void property="name">
+      <string>ODM Gear</string>
+     </void>
+     <void property="observers">
+      <object class="java.util.ArrayList"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="concord.Server">
+     <void property="name">
+      <string>Soups</string>
+     </void>
+     <void property="observers">
+      <object class="java.util.ArrayList"/>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="users">
+   <void method="add">
+    <object class="concord.User">
+     <void property="password">
+      <string>foundingtitan</string>
+     </void>
+     <void property="realName">
+      <string>Eren Y</string>
+     </void>
+     <void property="uniqueID">
+      <int>1</int>
+     </void>
+     <void property="username">
+      <string>RumblingKing</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="concord.User">
+     <void property="password">
+      <string>imhungry</string>
+     </void>
+     <void property="realName">
+      <string>Sasha </string>
+     </void>
+     <void property="uniqueID">
+      <int>2</int>
+     </void>
+     <void property="username">
+      <string>PotatoGirl</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="concord.User">
+     <void property="password">
+      <string>titanmom</string>
+     </void>
+     <void property="realName">
+      <string>Connie </string>
+     </void>
+     <void property="uniqueID">
+      <int>3</int>
+     </void>
+     <void property="username">
+      <string>imBald</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="concord.User">
+     <void property="password">
+      <string>prettyhuman</string>
+     </void>
+     <void property="realName">
+      <string>Pieck</string>
+     </void>
+     <void property="uniqueID">
+      <int>4</int>
+     </void>
+     <void property="username">
+      <string>cartTitan</string>
+     </void>
+    </object>
+   </void>
+  </void>
+ </object>
+</java>

@@ -1,9 +1,13 @@
 package concord;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Cloud
+public class Cloud implements Serializable 
 {
+	
+	private static final long serialVersionUID = -6057569205537813651L;
+	
 	ArrayList < Server > servers = new ArrayList <Server>();
 	ArrayList < User > users = new ArrayList <User>();
 	
@@ -33,6 +37,15 @@ public class Cloud
 	{
 		return serverCounter;
 	}
+	public void setServers( ArrayList<Server> sers )
+	{
+		servers = sers;
+	}
+	public  void setUsers(ArrayList<User> us)
+	{
+		users= us;
+	}
+	
 
 	public void createUser(String name, String un, String password) {
 		if(!usernameExists(un)) 
@@ -99,6 +112,14 @@ public class Cloud
 		
 		
 		
+	}
+
+
+	public void addServer(Server s)
+	{
+		
+			serverCounter = serverCounter+1;
+			servers.add(s);
 	}
 	
 	

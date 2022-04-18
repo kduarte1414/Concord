@@ -1,8 +1,14 @@
 package concord;
 
+import java.io.Serializable;
 
-public class Moderator extends Role
+public class Moderator extends Role implements Serializable 
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8569168885624066986L;
+
 	public Moderator(Server s) 
 	{
 	
@@ -11,6 +17,7 @@ public class Moderator extends Role
 	canKickUser = true;
 	canAssignModerator= true;
 	canAssignAdmin=false;
+	canChangeServerDescription= true;
 	serverIn=s;
 	canRespond = true;
 	canCreateNewMessage = true;

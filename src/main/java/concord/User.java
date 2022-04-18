@@ -1,9 +1,14 @@
 package concord;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class User
+public class User  implements  Serializable
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8270789288736559417L;
 	String username;
 	String realName;
 	String password;
@@ -14,6 +19,10 @@ public class User
 	ArrayList <Server> servers;
 	ArrayList <User> blocked; //list of blocked users
 	
+	public User()
+	{
+		
+	}
 	public User(String name, String un, int id , String pass)
 	{
 		servers = new ArrayList <Server>();
@@ -175,32 +184,46 @@ public class User
 		s.assignAdmin(this); //all permissions to creator
 		
 	}
-	
-	//check this again cause the cloud thing is iffy 
-	public void CreateServer(Cloud cloud,String name)
+	public void CreateServer(String name, int id)
 	{
-		cloud.createServer(name);
-		ArrayList <Server> list =cloud.getServers();
-		Server s = list.get(list.size() - 1);
-		s.addUsers(this);
-		s.assignAdmin(this);
+		Server s = new Server(name,id);
 		servers.add(s);
+		s.addUsers(this);
+		s.assignAdmin(this); //all permissions to creator
+		
 	}
 	
 	public void CreateChannel(Server s, String name)
 	{
-		if(s.getUsers().contains(this)) {
+		if(hasUser(s)) {
 			Channel c = new Channel(name,s.getId());
 			s.addChannel(c);
 		}
 	}
-	public void pinMessage(Message m) {
-		m.pinMessage();
+	
+	public void pinMessage(Channel c, Message m1) {
+		c.pinMessage(m1);
 	}
+	
 	public void invite(Server s, User u) {
 		if(servers.contains(s)) {
 			s.addUsers(u);
 		}
-	
 	}
+	
+	public boolean hasUser(Server s)
+	{
+		boolean found = false;
+
+		for(User u: s.getUsers())
+		{
+			if(u.getUniqueID()==uniqueID)
+			{
+				found = true;
+			}
+		}
+		return found;
+	}
+	
 }
+
