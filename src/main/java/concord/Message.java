@@ -25,15 +25,6 @@ public class Message implements Serializable
 		id = messageID;
 	}
 	
-	/*
-	//Messages that are in direct messages dont have channels
-	public Message(String t, int id, int Mid) {
-		text = t;
-		userID = id;
-		timeStamp= new Date();
-		id = Mid;
-	}
-	*/
 	//respond message 
 	public Message(String t, int id, Message m2) {
 		text = t;

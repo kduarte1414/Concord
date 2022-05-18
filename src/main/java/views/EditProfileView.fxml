@@ -3,54 +3,69 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.CreateAccountViewController">
+<BorderPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.EditProfileViewController">
    <top>
-      <Label text="Create A Concord Account" BorderPane.alignment="CENTER">
-         <font>
-            <Font size="28.0" />
-         </font>
+      <VBox alignment="CENTER" prefHeight="138.0" prefWidth="289.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="20.0" />
          </BorderPane.margin>
-      </Label>
+         <children>
+            <Label text="User Profile">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="98.0" fitWidth="93.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@personimg.png" />
+               </image>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </ImageView>
+         </children>
+      </VBox>
    </top>
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="* UserName: ">
+                  <Label text="UserName: ">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="20.0" prefWidth="300.0" promptText="Enter Username (required)" />
+                  <TextField prefHeight="20.0" prefWidth="300.0" promptText="Enter Username" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="* Password: ">
+                  <Label text="Password: ">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="20.0" prefWidth="300.0" promptText="Enter Password (required)" />
+                  <TextField prefHeight="20.0" prefWidth="300.0" promptText="Enter Password " />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Description: ">
+                  <Label text="Description">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="20.0" prefWidth="300.0" promptText="Your Discription (optional)" />
+                  <TextField prefHeight="20.0" prefWidth="300.0" promptText="Your Description " />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -77,7 +92,7 @@
       </VBox>
    </center>
    <bottom>
-      <Button mnemonicParsing="false" onAction="#onClickCreateAccount" text="Create Account" BorderPane.alignment="CENTER">
+      <Button mnemonicParsing="false" onAction="#onClickUpdateProfile" text="Update profile " BorderPane.alignment="CENTER">
          <font>
             <Font size="15.0" />
          </font>
@@ -86,4 +101,24 @@
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
+   <right>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="17.0" prefWidth="59.0" text="Blocked" textAlignment="CENTER">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ListView prefHeight="281.0" prefWidth="100.0" />
+            <Button alignment="CENTER" mnemonicParsing="false" text="unblock" textAlignment="CENTER">
+               <VBox.margin>
+                  <Insets left="20.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </right>
 </BorderPane>

@@ -18,6 +18,7 @@ public class Server implements Serializable, Observed
 	String name;
 	String description;
 	ArrayList <Observer> observers;
+
 	public Server()
 	{
 		
@@ -32,6 +33,7 @@ public class Server implements Serializable, Observed
 		userCount= users.size();
 		this.id = id;	
 	}
+
 	/**
 	 * @return the users
 	 */

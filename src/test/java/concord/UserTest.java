@@ -16,10 +16,18 @@ class UserTest
 	Server s2;
 	Server s3;
 	
+	String path;
+	
+	Theme t1;
+	Theme t2;
+	Theme t3;
+	
+	
 	@BeforeEach
 	void setUp() throws Exception
 	{
-		u1 = new User("Killua","zoldyck" , 2, "1234");
+		
+		path ="/Users/katherineduarte/eclipse-workspace/Concord/src/main/java/Main/";u1 = new User("Killua","zoldyck" , 2, "1234");
 		u2 = new User("Hisoka","cardFool", 3,"567"); 
 		u3 = new User("Gon", "fishingRod3", 4,"dadsucks");
 		u4 = new User("Chrollo","PhantomLead", 5, "7889");
@@ -27,6 +35,11 @@ class UserTest
 		s1 = new Server("Science",1);
 		s2 = new Server("Cooking",2);
 		s3 = new Server("Nen training",3);
+		
+		t1 = new Theme("LighteningColor",path);
+		t2 = new Theme("GonGreen",path);
+		//t3 = new Theme("PinknWhite",path);
+		
 		
 		
 		
@@ -74,6 +87,30 @@ class UserTest
 	
 		
 	}
+	@Test 
+	void soloSprintCSS(){
+		u1.createTheme("PinknWhite",path);
+		assertEquals(1, u1.getThemes().size());
+		assertEquals("PinknWhite", u1.getThemes().get(0).getThemeName());
+		
+		u1.setTheme("PinknWhite");
+		assertEquals(true, u1.getThemes().get(0).getisSetTheme());
+		
+		u1.createTheme("LighteningColor",path);
+		assertEquals(2, u1.getThemes().size());
+		
+		assertEquals(false, u1.getThemes().get(1).getisSetTheme());
+		
+		u1.setTheme("LighteningColor");
+		assertEquals(false, u1.getThemes().get(0).getisSetTheme());
+		assertEquals(true, u1.getThemes().get(1).getisSetTheme());
+		
+		u1.deleteTheme("PinknWhite");
+		assertEquals(1, u1.getThemes().size());
+	
+	
+	}
+}
 	
 
-}
+

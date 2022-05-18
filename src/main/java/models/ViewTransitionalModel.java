@@ -4,15 +4,18 @@ package models;
 import java.io.IOException;
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import views.CreateAccountViewController;
 import views.CreateServerViewModel;
 import views.HomePageController;
+import views.InviteViewController;
 import views.JoinViewController;
 import views.LoginViewController;
+import views.EditProfileViewController;
 import views.ServerViewController;
+import views.ThemeViewController;
 
 
 
@@ -20,10 +23,12 @@ public class ViewTransitionalModel implements ViewTransitionModelInterface
 {
 	BorderPane mainview;
 	ConcordModel model;
+	Stage s;
 	
-	public ViewTransitionalModel(BorderPane view, ConcordModel newModel) {
+	public ViewTransitionalModel(BorderPane view, ConcordModel newModel, Stage newS) {
 		mainview = view;
 		model = newModel;
+		s = newS;
 	}
 
 	@Override
@@ -33,6 +38,8 @@ public class ViewTransitionalModel implements ViewTransitionModelInterface
 		loader.setLocation(ViewTransitionalModel.class.getResource("../views/CreateAccountView.fxml"));
 		try
 		{
+			s.setWidth(600);
+			s.setHeight(500);
 			Pane view = loader.load();
 			mainview.setCenter(view);
 			CreateAccountViewController cont = loader.getController();
@@ -53,6 +60,8 @@ public class ViewTransitionalModel implements ViewTransitionModelInterface
 		loader.setLocation(ViewTransitionalModel.class.getResource("../views/CreateServerView.fxml"));
 		try
 		{
+			s.setWidth(600);
+			s.setHeight(400);
 			Pane view = loader.load();
 			mainview.setCenter(view);
 			CreateServerViewModel cont = loader.getController();
@@ -73,6 +82,8 @@ public class ViewTransitionalModel implements ViewTransitionModelInterface
 		loader.setLocation(ViewTransitionalModel.class.getResource("../views/HomePageView.fxml"));
 		try
 		{
+			s.setWidth(600);
+			s.setHeight(400);
 			Pane view = loader.load();
 			mainview.setCenter(view);
 			HomePageController cont = loader.getController();
@@ -89,7 +100,22 @@ public class ViewTransitionalModel implements ViewTransitionModelInterface
 	@Override
 	public void showInvite()
 	{
-		// TODO Auto-generated method stub
+		FXMLLoader loader  = new FXMLLoader();
+		loader.setLocation(ViewTransitionalModel.class.getResource("../views/InviteView.fxml"));
+		try
+		{
+			s.setWidth(500);
+			s.setHeight(400);
+			Pane view = loader.load();
+			mainview.setCenter(view);
+			InviteViewController cont = loader.getController();
+			cont.setModel(this,model);
+			
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -97,10 +123,12 @@ public class ViewTransitionalModel implements ViewTransitionModelInterface
 	public void showJoinServer()
 	{
 		FXMLLoader loader  = new FXMLLoader();
-		loader.setLocation(ViewTransitionalModel.class.getResource("../views/JoinView.fxml"));
+		loader.setLocation(ViewTransitionalModel.class.getResource("../views/JoinServerView.fxml"));
 		try
 		{
-			Node view = loader.load();
+			s.setWidth(500);
+			s.setHeight(400);
+			Pane view = loader.load();
 			mainview.setCenter(view);
 			JoinViewController cont = loader.getController();
 			cont.setModel(this,model);
@@ -120,6 +148,8 @@ public class ViewTransitionalModel implements ViewTransitionModelInterface
 		loader.setLocation(ViewTransitionalModel.class.getResource("../views/ServerView.fxml"));
 		try
 		{
+			s.setWidth(600);
+			s.setHeight(400);
 			Pane view = loader.load();
 			mainview.setCenter(view);
 			ServerViewController cont = loader.getController();
@@ -153,4 +183,45 @@ public class ViewTransitionalModel implements ViewTransitionModelInterface
 
 	}
 
+	@Override
+	public void showEditProfile()
+	{
+		FXMLLoader loader  = new FXMLLoader();
+		loader.setLocation(ViewTransitionalModel.class.getResource("../views/EditProfileView.fxml"));
+		try
+		{
+			Pane view = loader.load();
+			mainview.setCenter(view);
+			EditProfileViewController cont = loader.getController();
+			cont.setModel(this,model);
+			
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void showTheme()
+	{
+		FXMLLoader loader  = new FXMLLoader();
+		loader.setLocation(ViewTransitionalModel.class.getResource("../views/ThemeView.fxml"));
+		try
+		{
+			Pane view = loader.load();
+			mainview.setCenter(view);
+			ThemeViewController cont = loader.getController();
+			cont.setModel(this,model);
+			
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	
 }

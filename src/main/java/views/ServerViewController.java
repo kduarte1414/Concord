@@ -24,12 +24,25 @@ public class ServerViewController
     void onClickInvite(ActionEvent event) {
     	tran_model.showInvite();
     }
-
-
     @FXML
-    void onClickSearchServer(ActionEvent event) {
+    void onClickTheme(ActionEvent event) {
+    	tran_model.showTheme();
+    }
+    @FXML
+    void onClickEditProfile(ActionEvent event)
+    {
+    	tran_model.showEditProfile();
+    }
+    @FXML
+    void onClickJoinServer(ActionEvent event)
+    {
     	tran_model.showJoinServer();
+    }
+    @FXML
+    void onClickCreateServer(ActionEvent event) {
+    	tran_model.showCreateServer();
 
     }
+   
 
 }

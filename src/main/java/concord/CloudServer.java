@@ -39,5 +39,9 @@ public interface CloudServer extends Remote
 	public void setUsername(int userId, String text) throws RemoteException;
 	public void notifyUpdated() throws RemoteException;
 	public void addObserverServer(Client c, int serverId) throws RemoteException;
+	//final sprint additions
+	public void editTheme(int userId, String name) throws RemoteException;
+	public void deleteTheme(int userId, String name)throws RemoteException;
+	void createTheme(int userId, String name,String path)throws RemoteException;;
 	
 }

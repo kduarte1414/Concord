@@ -1,0 +1,106 @@
+.root
+{
+	-fx-background-color: rgb(234,223,240);
+}
+#MainLabel
+{
+
+	-fx-font-size: 30;
+	-fx-font-family:"Lucida Console";
+	-fx-text-fill:rgb(177,130,209);
+	-fx-text-alignment: "center";
+	
+}
+/* These are for HomepageView and ServerView */
+#chatHbox
+{
+
+	  	-fx-background-color: rgb(177,130,235);
+	
+}
+#ChatHeaderLabel
+{
+	 	-fx-text-alignment: "left";
+		-fx-font-size: 20;
+		-fx-text-fill:"white";
+	
+}
+#NavigationBar
+{
+	 -fx-background-color: rgb(177,130,235);
+	
+}
+
+
+
+.label
+{
+	-fx-font-family:"Lucida Console";
+	-fx-text-fill:rgb(177,130,209);
+
+}
+
+/* These are for LoginView */
+#passwordLabel
+{
+-fx-text-alignment: "left";
+-fx-text-fill:rgb(177,130,209);
+-fx-font-size: 20;
+	
+}
+#usernameLabel
+{
+	-fx-text-alignment: "left";
+	-fx-text-fill:rgb(177,130,209);
+	-fx-font-size: 20;
+}
+ /*Login view */
+#welcomeBorderPane
+{
+	-fx-background-color :rgb(234,223,240);/* lightest shade of purple */
+	-fx-border-radius: 50%;
+	-fx-padding: 3  3  3  3;
+	-fx-background-radius: 5.0;
+	
+}
+#backgroundBorderPane
+{
+	 -fx-background-color:rgb(143,90,176);
+}
+
+.button{
+	-fx-text-fill: rgb(143,90,176);
+   	-fx-border-color:  rgb(143,90,176);
+    -fx-border-radius: 50%;
+    -fx-padding: 3  3  3  3;
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-background-color: rgb(234,223,240);
+  
+}
+ .button:hover
+ {
+ 	  -fx-background-color:#D5E7B8;
+ 	
+ 	/*   -fx-text-fill: rgb(234,223,240);
+ 	  -fx-border-color: rgb(234,223,240);
+ 	  */
+ 	   
+ 	   
+ }
+ 
+
+#userLabel
+{
+	-fx-font-family:"Lucida Console";
+	-fx-text-fill:rgb(226,208,226);
+}
+.TextArea
+{
+	-fx-alignment: "left";
+}
+
+.ListView
+{
+	 
+}

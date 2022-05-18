@@ -30,7 +30,7 @@ public class Client extends UnicastRemoteObject implements Observer, Serializabl
 		return account;
 	}
 	public boolean authentication(String username, String password) throws RemoteException {
-		User u1 = Users.get(0);
+		User u1 = null;
 		account= u1;
 		for(User u: Users) {
 			if(u.getUsername().equals(username)) {
@@ -136,6 +136,18 @@ public class Client extends UnicastRemoteObject implements Observer, Serializabl
 	public void changeServerDescription(Server s, String description) throws RemoteException
 	{
 		rc.setServerDescription(account.uniqueID,s.getId(),description);
+	}
+	public void createTheme(String name, String path) throws RemoteException
+	{
+		rc.createTheme(account.uniqueID,name,path);
+	}
+	public void deleteTheme(String name) throws RemoteException
+	{
+		rc.deleteTheme(account.uniqueID,name);
+	}
+	public void editTheme(String name) throws RemoteException
+	{
+		rc.editTheme(account.uniqueID,name);
 	}
 	@Override
 	public void update() throws RemoteException

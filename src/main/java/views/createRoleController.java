@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import models.ConcordModel;
 import models.ViewTransitionModelInterface;
 
-public class InviteViewController
+public class createRoleController
 {
 	ViewTransitionModelInterface tran_model;
 	ConcordModel con_model;
@@ -16,12 +16,12 @@ public class InviteViewController
 	}
 	
     @FXML
-    void onClickCancel(ActionEvent event) {
+    void onClickCreateRole(ActionEvent event) {
     	tran_model.showHomePage();
     }
 
     @FXML
-    void onClickInvite(ActionEvent event) {
+    void onClickBack(ActionEvent event) {
     	tran_model.showServer();
     }
 

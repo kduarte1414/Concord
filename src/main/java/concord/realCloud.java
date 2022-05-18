@@ -103,12 +103,14 @@ public class realCloud extends UnicastRemoteObject implements Observed,CloudServ
 		User u = findUser(userID);
 		if(u.getUsername().equals(username) && u.getPassword().equals(password)) 
 		{
+			u.isOnline= true;
 			return true;
 			
 		}else {
 			
 			return false;
 		}
+		
 
 	}
 
@@ -404,6 +406,30 @@ public class realCloud extends UnicastRemoteObject implements Observed,CloudServ
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@Override
+	public void createTheme(int userId,String name,String path)
+	{
+		User u =findUser(userId);
+		u.createTheme(name,path);
+		
+	}
+
+	@Override
+	public void editTheme(int userId,String name)
+	{
+		User u =findUser(userId);
+		u.editTheme(name);
+		
+	}
+
+	@Override
+	public void deleteTheme(int userId,String name)
+	{
+		User u =findUser(userId);
+		u.deleteTheme(name);
+		
 	}	
 
 }

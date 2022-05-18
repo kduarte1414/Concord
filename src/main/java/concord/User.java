@@ -18,6 +18,8 @@ public class User  implements  Serializable
 	
 	ArrayList <Server> servers;
 	ArrayList <User> blocked; //list of blocked users
+	ArrayList <DirectMessage> dms;
+	ArrayList<Theme> themes;
 	
 	public User()
 	{
@@ -27,12 +29,29 @@ public class User  implements  Serializable
 	{
 		servers = new ArrayList <Server>();
 		blocked = new ArrayList <User>();
+		dms = new ArrayList<DirectMessage>();
+		themes =  new ArrayList<Theme>();
 		
 		realName = name;
 		username = un;
 		uniqueID = id;
 		password = pass;
 	}
+	/**
+	 * @return the themes
+	 */
+	public ArrayList<Theme> getThemes()
+	{
+		return themes;
+	}
+	/**
+	 * @param themes the themes to set
+	 */
+	public void setThemes(ArrayList<Theme> themes)
+	{
+		this.themes = themes;
+	}
+	
 	
 	/**
 	 * @return the realName
@@ -97,6 +116,10 @@ public class User  implements  Serializable
 	public ArrayList<User> getBlocked()
 	{
 		return blocked;
+	}
+	public ArrayList <DirectMessage> getDms()
+	{
+		return dms;
 	}
 
 	/**
@@ -225,5 +248,76 @@ public class User  implements  Serializable
 		return found;
 	}
 	
+	public void createDM(User u)
+	{
+		DirectMessage dm = new DirectMessage(u);
+		dm.addUser(this);
+		addDm(dm);
+		u.addDm(dm); //other person has this in the DMs too 
+	}
+	public void addDm(DirectMessage dm)
+	{
+		dms.add(dm);
+	}
+	
+	
+	//Final Sprint Additions
+	
+	public void createTheme(String name, String filePath)
+	{
+		Theme theme = new Theme(name,filePath);
+		themes.add(theme);
+	}
+
+	public void deleteTheme(String name)
+	{
+		int delete = findThemeIndex(name);
+		themes.get(delete).deleteTheme();
+		themes.remove(delete);
+		
+	}
+	public void editTheme(String name)
+	{
+		
+		Theme themeToEdit= findTheme(name);
+		//themeToEdit.changeProperty(null, null, name);
+		themeToEdit.editTheme();
+	}
+	public Theme findTheme(String name)
+	{
+		Theme found = null;
+		for(Theme theme:themes)
+		{
+			if(theme.getThemeName().equals(name))
+			{
+				found= theme;
+			}
+		}
+		return found;
+	}
+	public int findThemeIndex(String name)
+	{
+		int found = -1;
+		for(int i=0; i<themes.size();i++)
+		{
+			if(themes.get(i).getThemeName().equals(name))
+			{
+				found =i;
+			}
+		}
+		return found;
+	}
+	public void setTheme(String name)
+	{
+		int th =findThemeIndex(name);
+		//ensure no other themes are prefered
+		for(Theme theme: themes)
+		{
+			theme.isSetTheme(false);
+		}
+		
+		themes.get(th).isSetTheme(true);
+		
+	}
 }
 

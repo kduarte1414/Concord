@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import models.ConcordModel;
 import models.ViewTransitionModelInterface;
 
-public class InviteViewController
+public class EditProfileViewController
 {
 	ViewTransitionModelInterface tran_model;
 	ConcordModel con_model;
@@ -15,14 +15,10 @@ public class InviteViewController
 		con_model = newCon;
 	}
 	
-    @FXML
-    void onClickCancel(ActionEvent event) {
-    	tran_model.showHomePage();
-    }
-
-    @FXML
-    void onClickInvite(ActionEvent event) {
-    	tran_model.showServer();
-    }
-
+	  @FXML
+	    void onClickUpdateProfile(ActionEvent event) {
+	    	tran_model.showHomePage();
+	    }
 }
+
+	  

@@ -2,6 +2,7 @@ package views;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 import models.ConcordModel;
 import models.ViewTransitionModelInterface;
 
@@ -15,7 +16,12 @@ public class LoginViewController
 		con_model = newCon;
 	}
 	
-
+	@FXML
+	private TextField usernameTextField;
+	@FXML
+	private TextField passwordTextField;
+	
+	
 	
     @FXML
     void onClickCreateAccount(ActionEvent event) {
@@ -24,7 +30,12 @@ public class LoginViewController
 
     @FXML
     void onClickLogin(ActionEvent event) {
+    	String username = usernameTextField.textProperty().get();
+    	String password = passwordTextField.textProperty().get();
+
     	tran_model.showHomePage();
     }
+    
+    
 
 }

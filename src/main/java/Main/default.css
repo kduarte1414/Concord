@@ -1,0 +1,96 @@
+.root
+{
+	-fx-background-color: "white";
+}
+#MainLabel
+{
+
+	-fx-font-size: 30;
+	-fx-font-family:"Lucida Console";
+	-fx-text-fill: #86BBD8;
+	-fx-text-alignment: "center";
+	
+}
+/* These are for HomepageView and ServerView */
+#chatHbox
+{
+	 -fx-background-color: #86BBD8;
+	
+}
+#ChatHeaderLabel
+{
+	 -fx-text-alignment: "left";
+		-fx-font-size: 20;
+		-fx-text-fill:"white";
+}
+#NavigationBar
+{
+	 -fx-background-color: #86BBD8;
+}
+
+
+
+.label
+{
+	-fx-font-family:"Lucida Console";
+	-fx-text-fill: #86BBD8;
+}
+
+/* These are for LoginView */
+#passwordLabel
+{
+-fx-text-alignment: "left";
+-fx-font-size: 20;
+	
+}
+#usernameLabel
+{
+	-fx-text-alignment: "left";
+	-fx-font-size: 20;
+}
+ /*Login view */
+#welcomeBorderPane
+{
+	-fx-background-color :#E2EDF3;
+	-fx-border-radius: 50%;
+	-fx-padding: 3  3  3  3;
+	-fx-background-radius: 5.0;
+	
+}
+#backgroundBorderPane
+{
+	 -fx-background-color:#2D4554;
+}
+
+.button{
+	-fx-text-fill: #86BBD8;
+   	-fx-border-color:  #86BBD8;
+    -fx-border-radius: 50%;
+    -fx-padding: 3  3  3  3;
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-background-color: "white";
+  
+}
+ .button:hover
+ {
+ 	  -fx-background-color:#2D4554 ;
+ 	  -fx-text-fill: "white";
+ 	  -fx-border-color:  "white";
+ }
+ 
+
+#userLabel
+{
+	-fx-font-family:"Lucida Console";
+	-fx-text-fill: #86BBD8;
+}
+.TextArea
+{
+	-fx-alignment: "left";
+}
+
+.ListView
+{
+	 
+}
