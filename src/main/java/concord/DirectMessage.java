@@ -10,6 +10,13 @@ public class DirectMessage implements Serializable, Observed
 	private static final long serialVersionUID = 71296056621362836L;
 	ArrayList<User> users;
 	ArrayList <Message> messages;
+	@Override
+	
+	public String toString()
+	{
+		return ""+ users.get(0).getUsername();
+	}
+	
 	ArrayList <Observer> observers;
 	ArrayList <Message> pinned;
 	int id;

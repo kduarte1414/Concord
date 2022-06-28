@@ -1,8 +1,19 @@
 package Main;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.ArrayList;
+import java.util.Arrays;
 
+import concord.Channel;
+import concord.Cloud;
+import concord.CloudServer;
 import concord.Theme;
+import concord.realCloud;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -22,8 +33,40 @@ public class Main extends Application
 	{
 		
 		
+		/*Cloud cloud = new Cloud();
+		realCloud rc = new realCloud(cloud);
+		Registry registry = LocateRegistry.getRegistry(1099);
+		registry.rebind("RCLOUD",rc);	
+		//CloudServer cs = (CloudServer) Naming.lookup("rmi://127.0.0.1:1099/RCLOUD");
+		*/
 		
-		ConcordModel model  = new ConcordModel();
+		Cloud cloud = new Cloud();
+		cloud.createUser("kat", "katd", "123");
+		
+		ArrayList <String> names = new ArrayList<String>(Arrays.asList("Music","grapes","watermelon","lemon","lime","strawberries"));
+		
+		
+		for(String s: names) {
+			cloud.createServer(s);
+			Channel c = new Channel("test"+s,cloud.getServer(s).getId());
+			cloud.getServer(s).addChannel(c);
+			for(String s2:names)
+			{
+				Channel c2 = new Channel("test2"+s,cloud.getServer(s).getId());
+				cloud.getServer(s).addChannel(c2);
+			}
+		}
+		
+		cloud.createUser("Liz", "LizzyLi","123");
+		cloud.createUser("Eren", "rage", "123");
+		cloud.createUser("big", "BIG_CHUNGUS", "123");
+		cloud.createUser("little", "little_CHUNGUS", "123");
+		cloud.createUser("happy", "Happy_CHUNGUS:)", "123");
+		cloud.createUser("sexy", "Sexxyyy_CHUNGUS;)", "123");
+		
+		CloudServer cs = new realCloud(cloud);
+		
+		ConcordModel model  = new ConcordModel(cs);
 		FXMLLoader loader  = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("../views/MainView.fxml"));
 		BorderPane view = loader.load();

@@ -2,57 +2,52 @@ package views;
 
 import java.rmi.RemoteException;
 
+import concord.Channel;
 import concord.Server;
 import concord.User;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import models.ConcordModel;
 import models.ViewTransitionModelInterface;
 
-public class InviteViewController
-{
+public class CreateDmController {
+
 	ViewTransitionModelInterface tran_model;
 	ConcordModel con_model;
-	Server server;
-	
+
 	public void setModel(ViewTransitionModelInterface newTran,ConcordModel newCon) {
 		tran_model = newTran;
 		con_model = newCon;
-	}
-	public void setModel(ViewTransitionModelInterface newTran,ConcordModel newCon,Server s) {
-		tran_model = newTran;
-		con_model = newCon;
-		server = s;
-		
-		ServerNameLabel.setText(server.getName());
 		
 		UserListView.getItems().clear();
 		UserListView.setItems(con_model.getUsers());
 	}
-	@FXML
-    private Label ServerNameLabel;
-
-  
-    @FXML
-    private TextField UsernameTextField;
 	
     @FXML
-	    private ListView<User> UserListView;
+    private ListView<User> UserListView;
 
-	@FXML
+    @FXML
+    private Label UserNameLabel;
+
+    @FXML
+    private TextField UserNameTextField;
+
+    @FXML
     void onClickCancel(ActionEvent event) {
     	tran_model.showHomePage();
     }
 
     @FXML
-    void onClickInvite(ActionEvent event) {
+    void onClickCreate(ActionEvent event) {
     	User selected= UserListView.getSelectionModel().getSelectedItem();
     	try
 		{
-			con_model.getClient().invite(selected,server);
+			con_model.getClient().createDM(selected);
 			tran_model.showHomePage();
 			
 		
@@ -61,8 +56,20 @@ public class InviteViewController
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	tran_model.showServer(server);
     }
-    
+   
+    @FXML
+    void onSelectUser(MouseEvent event) {
+    	UserListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    		@Override
+    		public void handle(MouseEvent click)
+    		{
+    			if (click.getClickCount() == 1) {
+    				User selected = UserListView.getSelectionModel().getSelectedItem();
+    				UserNameLabel.setText(selected.getUsername());
+    			}
+    		}	
+        });
+    }
 
 }

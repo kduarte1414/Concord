@@ -27,6 +27,8 @@ class ClientTest
 	Server s1;
 	Server s2;
 	
+	String path;
+	
 	@BeforeAll
 	static void setupServer()
 	{
@@ -75,6 +77,7 @@ class ClientTest
 		
 		client.authentication("NobodyNobody", "onlyHeartbreaker");
 		client.updateCounter=0;
+		path ="/Users/katherineduarte/eclipse-workspace/Concord/src/main/java/Main/";
 	}
 
 	@Test
@@ -381,6 +384,36 @@ class ClientTest
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	@Test 
+	void ThemeTest()
+	{
+		try
+		{
+			client.createTheme("CoffeeBeans", path);
+			assertEquals(1,user1.getThemes().size());
+			assertEquals("CoffeeBeans",user1.getThemes().get(0).getThemeName());
+			assertEquals(false,user1.getThemes().get(0).isSetTheme);
+			client.setToTheme("CoffeeBeans");
+			assertEquals(true,user1.getThemes().get(0).isSetTheme);
+			client.createTheme("DarkMode", path);
+			assertEquals(2,user1.getThemes().size());
+			assertEquals("DarkMode",user1.getThemes().get(1).getThemeName());
+			assertEquals(false,user1.getThemes().get(1).isSetTheme);
+			client.setToTheme("DarkMode");
+			assertEquals(true,user1.getThemes().get(1).isSetTheme);
+			client.deleteTheme("DarkMode");
+			assertEquals(1,user1.getThemes().size());
+			
+			
+		} catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 	

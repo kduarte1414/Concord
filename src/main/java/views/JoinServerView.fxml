@@ -21,10 +21,10 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField prefWidth="300.0" />
+                  <TextField fx:id="ServerNameTextField" prefWidth="300.0" />
                </children>
             </HBox>
-            <ListView prefHeight="200.0" prefWidth="200.0" />
+            <ListView fx:id="ServerListView" prefHeight="200.0" prefWidth="400.0" />
          </children>
       </VBox>
    </center>

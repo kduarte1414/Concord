@@ -3,11 +3,14 @@ package models;
 
 import java.io.IOException;
 
+import concord.Server;
+import concord.User;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import views.CreateAccountViewController;
+import views.CreateDmController;
 import views.CreateServerViewModel;
 import views.HomePageController;
 import views.InviteViewController;
@@ -75,6 +78,7 @@ public class ViewTransitionalModel implements ViewTransitionModelInterface
 
 	}
 
+	
 	@Override
 	public void showHomePage()
 	{
@@ -138,11 +142,10 @@ public class ViewTransitionalModel implements ViewTransitionModelInterface
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
-
+	
 	@Override
-	public void showServer()
+	public void showServer( )
 	{
 		FXMLLoader loader  = new FXMLLoader();
 		loader.setLocation(ViewTransitionalModel.class.getResource("../views/ServerView.fxml"));
@@ -214,6 +217,70 @@ public class ViewTransitionalModel implements ViewTransitionModelInterface
 			mainview.setCenter(view);
 			ThemeViewController cont = loader.getController();
 			cont.setModel(this,model);
+			
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void showServer(Server server)
+	{
+		FXMLLoader loader  = new FXMLLoader();
+		loader.setLocation(ViewTransitionalModel.class.getResource("../views/ServerView.fxml"));
+		try
+		{
+			s.setWidth(600);
+			s.setHeight(400);
+			Pane view = loader.load();
+			mainview.setCenter(view);
+			ServerViewController cont = loader.getController();
+			cont.setModel(this,model,server); 
+			
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void showCreateDM()
+	{
+		FXMLLoader loader  = new FXMLLoader();
+		loader.setLocation(ViewTransitionalModel.class.getResource("../views/CreateDmView.fxml"));
+		try
+		{
+			Pane view = loader.load();
+			mainview.setCenter(view);
+			CreateDmController cont = loader.getController();
+			cont.setModel(this,model);
+			
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void showInvite(Server server)
+	{
+		FXMLLoader loader  = new FXMLLoader();
+		loader.setLocation(ViewTransitionalModel.class.getResource("../views/InviteView.fxml"));
+		try
+		{
+			s.setWidth(600);
+			s.setHeight(400);
+			Pane view = loader.load();
+			mainview.setCenter(view);
+			InviteViewController cont = loader.getController();
+			cont.setModel(this,model,server); 
 			
 		} catch (IOException e)
 		{

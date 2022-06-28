@@ -420,8 +420,7 @@ public class realCloud extends UnicastRemoteObject implements Observed,CloudServ
 	public void editTheme(int userId,String name)
 	{
 		User u =findUser(userId);
-		u.editTheme(name);
-		
+		u.editTheme(name);	
 	}
 
 	@Override
@@ -430,6 +429,62 @@ public class realCloud extends UnicastRemoteObject implements Observed,CloudServ
 		User u =findUser(userId);
 		u.deleteTheme(name);
 		
-	}	
+	}
+
+	@Override
+	public void setToTheme(int userId, String name)
+	{
+		User u =findUser(userId);
+		u.setTheme(name);
+		
+	}
+	public void addUser(String name,String username,String password )
+	{
+		cloud.createUser(name,username,password);
+	}
+	
+	public void addClient(String name,String username,String password )
+	{
+		cloud.createUser(name,username,password);
+		try
+		{
+			Client newClient = new Client(this);
+			addObserver(newClient);
+		} catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		
+	}
+	public void addClient(Client c,String name,String username,String password  )
+	{
+		try
+		{
+			cloud.createUser(name,username,password);
+			addObserver(c);
+		} catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		
+	}
+	@Override
+	public void createDM(int uniqueID, int uniqueID2) throws RemoteException
+	{
+		User u = findUser(uniqueID);
+		User u2 = findUser(uniqueID2);
+		u.createDM(u2);	
+	}
+
+	@Override
+	public void sendDmMessage(int uniqueID, DirectMessage dmSelected, String text) throws RemoteException
+	{
+		User u = findUser(uniqueID);
+		u.sendDMmessage(text, dmSelected);
+	}
+
+	
 
 }

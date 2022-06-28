@@ -33,7 +33,7 @@
                         <Insets left="5.0" top="15.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField alignment="CENTER" prefHeight="26.0">
+                  <TextField fx:id="nameServerTextField" alignment="CENTER" prefHeight="26.0">
                      <HBox.margin>
                         <Insets bottom="10.0" left="5.0" top="10.0" />
                      </HBox.margin>
@@ -50,7 +50,7 @@
                         <Insets left="5.0" top="15.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField alignment="CENTER">
+                  <TextField fx:id="DescriptionTextField" alignment="CENTER">
                      <HBox.margin>
                         <Insets bottom="10.0" left="5.0" top="10.0" />
                      </HBox.margin>

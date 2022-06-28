@@ -11,23 +11,23 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.InviteViewController">
+<BorderPane prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.CreateDmController">
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER" prefHeight="55.0" prefWidth="500.0">
                <children>
-                  <Label text="UserName: ">
+                  <Label text="UserName">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="UsernameTextField" prefWidth="300.0" />
+                  <TextField fx:id="UserNameTextField" prefWidth="300.0" />
                </children>
             </HBox>
-            <ScrollPane prefHeight="200.0" prefWidth="200.0">
+            <ScrollPane prefHeight="200.0" prefWidth="379.0">
                <content>
-                  <ListView fx:id="UserListView" prefHeight="200.0" prefWidth="483.0" />
+                  <ListView fx:id="UserListView" onMouseClicked="#onSelectUser" prefHeight="200.0" prefWidth="483.0" />
                </content>
             </ScrollPane>
          </children>
@@ -44,7 +44,7 @@
                   <Insets right="30.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" onAction="#onClickInvite" prefHeight="30.0" prefWidth="100.0" text="Invite">
+            <Button mnemonicParsing="false" onAction="#onClickCreate" prefHeight="30.0" prefWidth="100.0" text="create DM">
                <font>
                   <Font size="15.0" />
                </font>
@@ -58,12 +58,12 @@
    <top>
       <HBox alignment="CENTER" prefHeight="35.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" text="Search User to Add to ">
+            <Label alignment="CENTER" text="Send message to ">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label fx:id="ServerNameLabel" alignment="CENTER" text="[Server Name]">
+            <Label fx:id="UserNameLabel" alignment="CENTER" text="user">
                <font>
                   <Font size="25.0" />
                </font>

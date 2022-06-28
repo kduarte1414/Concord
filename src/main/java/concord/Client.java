@@ -35,6 +35,7 @@ public class Client extends UnicastRemoteObject implements Observer, Serializabl
 		for(User u: Users) {
 			if(u.getUsername().equals(username)) {
 				account = u;
+				//System.out.println("account found");
 			}
 		}
 		return rc.verifyPassword(account.getUniqueID(), username, password);
@@ -140,6 +141,11 @@ public class Client extends UnicastRemoteObject implements Observer, Serializabl
 	public void createTheme(String name, String path) throws RemoteException
 	{
 		rc.createTheme(account.uniqueID,name,path);
+		
+	}
+	public void createDM(User u) throws RemoteException
+	{
+		rc.createDM(account.getUniqueID(),u.getUniqueID());
 	}
 	public void deleteTheme(String name) throws RemoteException
 	{
@@ -149,11 +155,21 @@ public class Client extends UnicastRemoteObject implements Observer, Serializabl
 	{
 		rc.editTheme(account.uniqueID,name);
 	}
+	public void setToTheme(String name) throws RemoteException
+	{
+		rc.setToTheme(account.uniqueID,name);
+	}
 	@Override
 	public void update() throws RemoteException
 	{
 		updateCounter++;
 	
+	}
+
+	public void sendDMmessage(DirectMessage dmSelected, String text) throws RemoteException
+	{
+		rc.sendDmMessage(account.getUniqueID(),dmSelected,text);
+		
 	}
 	
 	

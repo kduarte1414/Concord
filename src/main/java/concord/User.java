@@ -4,15 +4,13 @@ import java.util.ArrayList;
 
 public class User  implements  Serializable
 {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8270789288736559417L;
 	String username;
 	String realName;
 	String password;
 	String userBio;
+	String hobbies;
+	String picture;
 	int uniqueID;
 	boolean isOnline;
 	
@@ -36,6 +34,34 @@ public class User  implements  Serializable
 		username = un;
 		uniqueID = id;
 		password = pass;
+	}
+	/**
+	 * @return the hobbies
+	 */
+	public String getHobbies()
+	{
+		return hobbies;
+	}
+	/**
+	 * @param hobbies the hobbies to set
+	 */
+	public void setHobbies(String hobbies)
+	{
+		this.hobbies = hobbies;
+	}
+	/**
+	 * @return the picture
+	 */
+	public String getPicture()
+	{
+		return picture;
+	}
+	/**
+	 * @param picture the picture to set
+	 */
+	public void setPicture(String picture)
+	{
+		this.picture = picture;
 	}
 	/**
 	 * @return the themes
@@ -255,6 +281,11 @@ public class User  implements  Serializable
 		addDm(dm);
 		u.addDm(dm); //other person has this in the DMs too 
 	}
+	public void sendDMmessage(String text, DirectMessage dm)
+	{
+		Message m1 = new Message(text,this.uniqueID);
+		dm.addMessage(m1);	
+	}
 	public void addDm(DirectMessage dm)
 	{
 		dms.add(dm);
@@ -318,6 +349,11 @@ public class User  implements  Serializable
 		
 		themes.get(th).isSetTheme(true);
 		
+	}
+	@Override
+	public String toString()
+	{
+		return "" + username + "";
 	}
 }
 

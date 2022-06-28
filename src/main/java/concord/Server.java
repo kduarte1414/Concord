@@ -238,6 +238,12 @@ public class Server implements Serializable, Observed
 	{
 		this.observers = observers;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return ""+name+ "";
+	}
 	public void update()
 	{
 		for(Observer o: observers)

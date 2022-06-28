@@ -14,7 +14,7 @@
    <children>
       <ToolBar id="NavigationBar" prefHeight="18.0" prefWidth="600.0">
          <items>
-            <Button mnemonicParsing="false" onAction="#onClickEditProfile" text="Profile" />
+            <Button fx:id="profileButton" mnemonicParsing="false" onAction="#onClickEditProfile" text="Profile" />
             <Button mnemonicParsing="false" onAction="#onClickTheme" text="Theme" />
          </items>
       </ToolBar>
@@ -22,15 +22,15 @@
          <children>
             <VBox prefHeight="400.0" prefWidth="100.0">
                <children>
-                  <ListView fx:id="ServerListView" prefHeight="300.0" prefWidth="200.0" />
+                  <ListView fx:id="ServerListView" onMouseClicked="#onClickSelectServer" prefHeight="300.0" prefWidth="200.0" />
                   <Button alignment="BOTTOM_CENTER" mnemonicParsing="false" onAction="#onClickJoinServer" prefHeight="30.0" prefWidth="100.0" text="Join Server" />
                   <Button alignment="BOTTOM_CENTER" mnemonicParsing="false" onAction="#onClickCreateServer" prefHeight="30.0" prefWidth="100.0" text="Create Server" />
                </children>
             </VBox>
             <VBox prefHeight="400.0" prefWidth="100.0">
                <children>
-                  <ListView fx:id="DmListView" prefHeight="350.0" prefWidth="200.0" />
-                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#onClickInvite" prefHeight="30.0" prefWidth="100.0" text="Invite" />
+                  <ListView fx:id="DmListView" onMouseClicked="#onSelectDM" prefHeight="350.0" prefWidth="200.0" />
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#onClickCreateDM" prefHeight="30.0" prefWidth="100.0" text="Create DM" />
                </children>
                <HBox.margin>
                   <Insets left="5.0" />
@@ -48,7 +48,7 @@
                   <HBox prefHeight="34.0" prefWidth="235.0" BorderPane.alignment="CENTER">
                      <children>
                         <TextField fx:id="TextMessageTextField" prefHeight="30.0" prefWidth="280.0" promptText="Text message" />
-                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Send">
+                        <Button mnemonicParsing="false" onAction="#onClickSend" prefHeight="30.0" prefWidth="100.0" text="Send">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>

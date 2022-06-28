@@ -25,12 +25,22 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
+                  <Label text="* Name: ">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="nameTextField" prefHeight="20.0" prefWidth="300.0" promptText="Enter full name(required)" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
                   <Label text="* UserName: ">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="20.0" prefWidth="300.0" promptText="Enter Username (required)" />
+                  <TextField fx:id="usernameTextField" prefHeight="20.0" prefWidth="300.0" promptText="Enter Username (required)" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -40,7 +50,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="20.0" prefWidth="300.0" promptText="Enter Password (required)" />
+                  <TextField fx:id="passwordTextField" prefHeight="20.0" prefWidth="300.0" promptText="Enter Password (required)" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -50,7 +60,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="20.0" prefWidth="300.0" promptText="Your Discription (optional)" />
+                  <TextField fx:id="descriptionTextField" prefHeight="20.0" prefWidth="300.0" promptText="Your Description (optional)" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -60,7 +70,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="20.0" prefWidth="300.0" promptText="Enter Hobbies (optional)" />
+                  <TextField fx:id="hobbiesTextField" prefHeight="20.0" prefWidth="300.0" promptText="Enter Hobbies (optional)" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -70,7 +80,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="20.0" prefWidth="300.0" promptText="Enter Picture path (optional)" />
+                  <TextField fx:id="pictureTextField" prefHeight="20.0" prefWidth="300.0" promptText="Enter Picture path (optional)" />
                </children>
             </HBox>
          </children>

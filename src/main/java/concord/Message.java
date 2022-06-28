@@ -18,6 +18,12 @@ public class Message implements Serializable
 	protected int id;
 	//protected Date timeStamp;
 	
+	public Message(String t, int id) {
+		text = t;
+		userID = id;
+		timeStamp= new Date();
+		
+	}
 	public Message(String t, int id, int messageID) {
 		text = t;
 		userID = id;

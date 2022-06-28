@@ -42,6 +42,9 @@ public interface CloudServer extends Remote
 	//final sprint additions
 	public void editTheme(int userId, String name) throws RemoteException;
 	public void deleteTheme(int userId, String name)throws RemoteException;
-	void createTheme(int userId, String name,String path)throws RemoteException;;
+	void createTheme(int userId, String name,String path)throws RemoteException;
+	public void setToTheme(int uniqueID, String name)throws RemoteException;
+	public void createDM(int uniqueID, int uniqueID2) throws RemoteException;
+	public void sendDmMessage(int uniqueID,DirectMessage dmSelected, String text)throws RemoteException;
 	
 }
